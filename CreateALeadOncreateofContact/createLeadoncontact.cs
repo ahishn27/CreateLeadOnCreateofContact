@@ -39,6 +39,7 @@ namespace CreateALeadOncreateofContact
                         return;
 
                     string firstName = contact["firstname"].ToString();
+                    tracingservice.Trace("firstname");
                     string lastName = contact["lastname"].ToString();
                     string phone = contact["mobilephone"].ToString();
                     string email = contact["emailaddress1"].ToString();
