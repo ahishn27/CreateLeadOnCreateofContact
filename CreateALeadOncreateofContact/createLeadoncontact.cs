@@ -18,25 +18,28 @@ namespace CreateALeadOncreateofContact
 
             // Obtain the execution context from the service provider.
             IPluginExecutionContext context = (IPluginExecutionContext)serviceProvider.GetService(typeof(IPluginExecutionContext));
-
+            tracingservice.Trace("Context Obtained Invoked");
             //Provides programmatic access to the metadata and data for an organization.
             IOrganizationServiceFactory organizationServiceFactory = (IOrganizationServiceFactory)serviceProvider.GetService(typeof(IOrganizationServiceFactory));
             IOrganizationService service = organizationServiceFactory.CreateOrganizationService(context.UserId);
-
-            try
-            {
+            tracingservice.Trace("Org Service Invoked");
+            
                 int step = 1;
 
                 if(context.InputParameters.Contains("Target") & context.InputParameters["Target"] is Entity)
                 {
+               
 
                     Guid LeadID;
-
-
+              
                     Entity contact = (Entity)context.InputParameters["Target"];
 
-                    if (contact.LogicalName != "account")
-                        return;
+                if (contact.LogicalName != "contact")
+
+                    return;
+
+                try
+                {
 
                     string firstName = contact["firstname"].ToString();
                     tracingservice.Trace("firstname");
